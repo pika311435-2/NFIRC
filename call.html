@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>聯絡我們</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            background-color: #121212;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        nav {
+            background-color: rgba(30, 30, 30, 0.9);
+            overflow: hidden;
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-logo {
+            height: 50px;
+            width: 50px;
+            margin-right: 15px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 2px 5px rgba(100, 65, 165, 0.7);
+        }
+
+        .nav-nfirc {
+            font-size: 2em;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 8px #6441A5;
+            transition: color 0.3s;
+            color: white;
+            margin-right: 20px; /* Add some spacing after NFIRC text */
+        }
+
+        .nav-nfirc:hover {
+            color: #6441A5;
+        }
+
+        .nav-btns {
+            display: flex; /* Use flexbox for the buttons */
+            align-items: center; /* Vertically align the buttons */
+        }
+
+        .nav-btns a {
+            display: inline-block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            transition: background-color 0.3s, color 0.3s;
+            border-radius: 5px;
+            margin-left: 20px;
+            background-color: rgba(100, 65, 165, 0.3);
+            border: 1px solid #6441A5;
+        }
+
+        .nav-btns a:hover {
+            background-color: #6441A5;
+            color: white;
+        }
+
+        /* Add a class for the rightmost button */
+        .nav-btns a:last-child {
+            margin-right: 40px; /* Remove right margin from the last button */
+        }
+
+        .container {
+            padding: 120px 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 4em;
+            margin-bottom: 30px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
+            letter-spacing: 2px;
+        }
+
+        textarea {
+            width: 80%;
+            height: 200px;
+            margin-bottom: 20px;
+            padding: 10px;
+            font-size: 1.2em;
+            border-radius: 7px;
+            border: 1px solid #6441A5;
+            background-color: rgba(30, 30, 30, 0.8);
+            color: #fff;
+        }
+
+        .send-button {
+            background-color: #6441A5;
+            color: white;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+        }
+
+        .send-button:hover {
+            background-color: #452A7A;
+            transform: translateY(-2px);
+        }
+
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .background-animation span {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            background: rgba(100, 65, 165, 0.6);
+            animation: animate 6s linear infinite;
+            bottom: -150px;
+            border-radius: 50%;
+            opacity: 0;
+        }
+
+        .background-animation span:nth-child(even) {
+            background: rgba(69, 42, 122, 0.6);
+        }
+
+        .background-animation span:nth-child(3n+1) {
+            left: 15%;
+            width: 60px;
+            height: 60px;
+            animation-delay: 1s;
+        }
+
+        .background-animation span:nth-child(3n+2) {
+            left: 45%;
+            width: 80px;
+            height: 80px;
+            animation-delay: 2s;
+        }
+
+        .background-animation span:nth-child(3n+3) {
+            left: 75%;
+            width: 50px;
+            height: 50px;
+            animation-delay: 3s;
+        }
+
+        @keyframes animate {
+            0% {
+                transform: translateY(0) scale(0);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-900px) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive adjustments for the navigation bar */
+        @media (max-width: 768px) {
+            .nav-btns {
+                flex-direction: column; /* Stack buttons on smaller screens */
+                align-items: stretch; /* Make buttons full width */
+            }
+
+            .nav-btns a {
+                margin-left: 0; /* Remove left margin */
+                margin-top: 10px; /* Add some spacing between buttons */
+            }
+
+            .nav-btns a:last-child {
+                margin-right: 0; /* Ensure no right margin on the last button */
+                margin-bottom: 0;
+            }
+
+            .nav-btns-container {
+                display: none; /* Hide the button container by default */
+            }
+
+            .hamburger-icon {
+                display: flex;
+                flex-direction: column;
+                cursor: pointer;
+            }
+
+            .hamburger-icon div {
+                width: 25px;
+                height: 3px;
+                background-color: #fff;
+                margin: 4px 0;
+                transition: all 0.3s;
+            }
+
+            .nav-active {
+                display: flex !important;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                right: 20px;
+                background-color: rgba(30, 30, 30, 0.9);
+                padding: 10px;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+                z-index: 200;
+            }
+
+            .nav-active a {
+                margin: 10px 0;
+                padding: 10px 15px;
+                font-size: 1.1em;
+                background-color: rgba(100, 65, 165, 0.3);
+                border: 1px solid #6441A5;
+                border-radius: 5px;
+                transition: background-color 0.3s, color 0.3s;
+            }
+
+            .nav-active a:hover {
+                background-color: #6441A5;
+                color: white;
+            }
+        }
+
+        footer {
+            background-color: rgba(30, 30, 30, 0.9);
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+            z-index: 10;
+            margin-top: 20px;
+        }
+
+        #scrollToTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color:  rgba(100, 65, 165, 0.3);
+            color: #f2f2f2;
+            border: 1px solid #6441A5;
+            border-radius: 5px;
+            padding: 14px 20px;
+            cursor: pointer;
+            font-size: 1em;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+            transition: background-color 0.3s, transform 0.2s, color 0.3s;
+            z-index: 1000; /* Ensure it's above the footer */
+        }
+
+        #scrollToTopBtn:hover {
+            background-color: #6441A5;
+            color: white;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-left">
+            <img src="nfirc_logo.png" alt="NFIRC Logo" class="nav-logo">
+            <a href="main.html" class="nav-nfirc">
+                <img src="/photo/NFIRC.jpg" width="100px" alt="">
+            </a>
+        </div>
+        <div class="nav-btns-container">
+            <div class="nav-btns">
+                <a href="main.html">主頁</a>
+                <a href="call.html">聯絡我們</a>
+                <a href="connect.html">相關連結</a>
+                <a href="https://discord.gg/WKance2y" target="_blank">Discord 社群</a>
+                <a href="https://www.instagram.com/nfirc_3rd?utm_source=ig_web_button_share_sheet&igsh=N3IzM2xkb2RoYnFx" target="_blank">Instagram</a>
+            </div>
+        </div>
+        <div class="hamburger-icon">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 id="title">聯絡我們</h1>
+        <textarea id="message" placeholder="請輸入您的訊息"></textarea>
+        <button class="send-button" onclick="sendMessage()">發送訊息</button>
+    </div>
+
+    <div class="background-animation">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <footer>
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <a href="https://www.instagram.com/nfirc_3rd?utm_source=ig_web_button_share_sheet&igsh=N3IzM2xkb2RoYnFx" target="_blank" style="margin: 0 10px;">
+                <img src="/photo/ig.jpg" alt="Instagram" style="width: 150px; height: 60px;">
+            </a>
+            <a href="https://discord.gg/WKance2y" target="_blank" style="margin: 0 10px;">
+                <img src="/photo/discord.png" alt="Discord" style="width: 150px; height: 60px;">
+            </a>
+        </div>
+        <div style="margin-top: 10px; color: #f2f2f2; text-align: center;">
+            連絡方式：
+        </div>
+        <div style="margin-top: 5px; color: #f2f2f2; text-align: center;">
+            電話：0958356776　　gmail：a0929555234@gmail.com
+        </div>
+        <p style="text-align: center;">&copy; 2024 南大附中資訊研究社</p>
+    </footer>
+
+    <button id="scrollToTopBtn" title="Go to top">Top</button>
+
+    <script>
+        const titleElement = document.getElementById('title');
+        const titleText = titleElement.textContent;
+        titleElement.textContent = '';
+
+        let charIndex = 0;
+        const typingDelay = 50;
+
+        function typeTitle() {
+            if (charIndex < titleText.length) {
+                titleElement.textContent += titleText.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeTitle, typingDelay);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            typeTitle();
+        });
+
+        function sendMessage() {
+            const message = document.getElementById('message').value;
+            if (message) {
+                fetch('/send_message', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({message: message})
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('訊息已發送!');
+                        document.getElementById('message').value = ''; // Clear the textarea
+                    } else {
+                        alert('訊息發送失敗!');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('訊息發送失敗!');
+                });
+            } else {
+                alert('請輸入訊息!');
+            }
+        }
+
+        // Scroll to top button functionality
+        const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                scrollToTopBtn.style.display = "block";
+            } else {
+                scrollToTopBtn.style.display = "none";
+            }
+        }
+
+        scrollToTopBtn.addEventListener('click', () => {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        });
+
+        // Hamburger menu functionality
+        const hamburgerIcon = document.querySelector('.hamburger-icon');
+        const navBtnsContainer = document.querySelector('.nav-btns-container');
+
+        hamburgerIcon.addEventListener('click', () => {
+            navBtnsContainer.classList.toggle('nav-active');
+            hamburgerIcon.classList.toggle('active');
+        });
+    </script>
+
+</body>
+</html>

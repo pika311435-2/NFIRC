@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>南大附中資訊研究社</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            background-color: #121212;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        nav {
+            background-color: rgba(30, 30, 30, 0.9);
+            overflow: hidden;
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-logo {
+            height: 50px;
+            width: 50px;
+            margin-right: 15px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 2px 5px rgba(100, 65, 165, 0.7);
+        }
+
+        .nav-nfirc {
+            font-size: 3em;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 8px #6441A5;
+            transition: color 0.3s;
+            color: white;
+            margin-right: 20px; /* Add some spacing after NFIRC text */
+        }
+
+        .nav-nfirc:hover {
+            color: #6441A5;
+        }
+
+        .nav-btns {
+            display: flex; /* Use flexbox for the buttons */
+            align-items: center; /* Vertically align the buttons */
+        }
+
+        .nav-btns a {
+            display: inline-block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            transition: background-color 0.3s, color 0.3s;
+            border-radius: 5px;
+            margin-left: 20px;
+            background-color: rgba(100, 65, 165, 0.3);
+            border: 1px solid #6441A5;
+        }
+
+        .nav-btns a:hover {
+            background-color: #6441A5;
+            color: white;
+        }
+
+        /* Add a class for the rightmost button */
+        .nav-btns a:last-child {
+            margin-right: 40px; /* Remove right margin from the last button */
+        }
+
+        .container {
+            padding: 120px 20px;
+            text-align: center;
+        }
+
+        .container2 {
+            padding: 10px 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 4em;
+            margin-bottom: 30px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
+            letter-spacing: 2px;
+        }
+
+        p {
+            font-size: 1.3em;
+            line-height: 1.7;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: rgba(30, 30, 30, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+        }
+
+        .cool-button {
+            background-color: #6441A5;
+            color: white;
+            padding: 16px 30px;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin-top: 30px;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+        }
+
+        .cool-button:hover {
+            background-color: #452A7A;
+            transform: translateY(-2px);
+        }
+
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .background-animation span {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            background: rgba(100, 65, 165, 0.6);
+            animation: animate 6s linear infinite;
+            bottom: -150px;
+            border-radius: 50%;
+            opacity: 0;
+        }
+
+        .background-animation span:nth-child(even) {
+            background: rgba(69, 42, 122, 0.6);
+        }
+
+        .background-animation span:nth-child(3n+1) {
+            left: 15%;
+            width: 60px;
+            height: 60px;
+            animation-delay: 1s;
+        }
+
+        .background-animation span:nth-child(3n+2) {
+            left: 45%;
+            width: 80px;
+            height: 80px;
+            animation-delay: 2s;
+        }
+
+        .background-animation span:nth-child(3n+3) {
+            left: 75%;
+            width: 50px;
+            height: 50px;
+            animation-delay: 3s;
+        }
+
+        @keyframes animate {
+            0% {
+                transform: translateY(0) scale(0);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-900px) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive adjustments for the navigation bar */
+        @media (max-width: 768px) {
+            .nav-btns {
+                flex-direction: column; /* Stack buttons on smaller screens */
+                align-items: stretch; /* Make buttons full width */
+            }
+
+            .nav-btns a {
+                margin-left: 0; /* Remove left margin */
+                margin-top: 10px; /* Add some spacing between buttons */
+            }
+
+            .nav-btns a:last-child {
+                margin-right: 0; /* Ensure no right margin on the last button */
+                margin-bottom: 0;
+            }
+        }
+
+        footer {
+            background-color: rgba(30, 30, 30, 0.9);
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 -2px 6px rgba(0,0,0,0.2);
+            margin-top: 20px;
+        }
+
+        footer p {
+            margin: 0;
+            color: #f2f2f2;
+            text-align: center; /* Center the copyright text */
+        }
+
+        #scrollToTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color:  rgba(100, 65, 165, 0.3);
+            color: #f2f2f2;
+            border: 1px solid #6441A5;
+            border-radius: 5px;
+            padding: 14px 20px;
+            cursor: pointer;
+            font-size: 1em;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+            transition: background-color 0.3s, transform 0.2s, color 0.3s;
+            z-index: 1000; /* Ensure it's above the footer */
+        }
+
+        #scrollToTopBtn:hover {
+            background-color: #6441A5;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .features {
+            width: 70%;
+            margin: 30px auto;
+        }
+
+        .feature {
+            display: flex;
+            margin-bottom: 30px;
+            background-color: rgba(30, 30, 30, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+
+        .feature.right {
+            flex-direction: row-reverse;
+        }
+
+        .feature img {
+            width: 45%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .feature .feature-content {
+            width: 80%;
+            padding: 20px;
+            text-align: left;
+        }
+
+        .feature .feature-content h3 {
+            font-size: 1.6em;
+            margin-bottom: 15px;
+        }
+
+        .feature .feature-content p {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        /* Responsive adjustments for the features section */
+        @media (max-width: 768px) {
+            .features {
+                grid-template-columns: 1fr; /* Stack features on smaller screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-left">
+            <img src="nfirc_logo.png" alt="NFIRC Logo" class="nav-logo">
+            <a href="main.html" class="nav-nfirc">
+                <img src="/photo/NFIRC.jpg" width="100px" alt="">
+            </a>
+        </div>
+        <div class="nav-btns">
+            <a href="main.html">主頁</a>
+            <a href="https://www.instagram.com/nfirc_3rd?utm_source=ig_web_button_share_sheet&igsh=N3IzM2xkb2RoYnFx" target="_blank">聯絡我們</a>
+            <a href="connect.html">相關連結</a>
+            <a href="https://discord.gg/WKance2y" target="_blank">Discord 社群</a>
+            <a href="https://www.instagram.com/nfirc_3rd?utm_source=ig_web_button_share_sheet&igsh=N3IzM2xkb2RoYnFx" target="_blank">Instagram</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 id="title">歡迎來到 南大附中資訊研究社</h1>
+        <p>
+            我們是一個充滿活力的社團，致力於提供資訊資源和學習環境，讓成員間能夠互相交流、分享經驗，並運用程式設計解決生活問題。
+            我們會定期舉辦聯合社課、聯合寒訓等等活動，歡迎所有對資訊有興趣的人加入。
+        </p>
+        <a href="https://discord.gg/WKance2y" class="cool-button" target="_blank">加入我們</a>
+    </div>
+
+    <div class="container2">
+        <h1 id="title">精彩活動</h1>
+    </div>
+
+    <section class="features">
+        <div class="feature">
+            <img src="/photo/2025迎新.png" alt="Feature 1">
+            <div class="feature-content">
+                <h3>南九校聯合迎新
+                    <a href="https://forms.gle/zGTHaL2vXKq5QG9Y9" target="_blank">(報名中)</a>
+                </h3>
+                    <h4>📅 活動日期：10/26（日）</h4>
+                    <h4>📍 活動地點：國立臺南女子高級中學椰風廳</h4>
+                    <h4>👥 參加對象：高中資訊社 高一、二學生（以高一新生為主）</h4>
+                    <h4>🎉 活動內容：趣味活動，破冰、交流、互動、講座課程（兩小時）</h4>
+                    <h4>👩‍💻 活動主旨：透過簡單有趣的活動，讓學員更加認識資訊社，並與不同學校的社員們交流想法、增進彼此的情誼，共同體驗資訊的樂趣與無限可能</h4>
+            </div>
+        </div>
+
+        <div class="feature right">
+            <img src="/photo/聯合社課.png" alt="Feature 2">
+            <div class="feature-content">
+                <h3>南四校聯合社課(已截止)</h3>
+                    <h4>🎨 主題：基礎網頁設計</h4>
+                    <h4>💻 四校聯合主辦：臺南女中 X 臺南一中 X 臺南二中 X 南大附中</h4>
+                    <h4>📍 地點：臺南一中</h4>
+                    <h4>📅 時間：2025/5/25（日） 9:00 - 17:00</h4>
+                    <h4>💰 費用：免費！（不含午餐及保險）</h4>
+                    <h4>這是一個讓你從 0 開始學習網頁設計的絕佳機會！</h4>
+
+
+            </div>
+        </div>
+
+        <div class="feature">
+            <img src="/photo/2025寒訓.png" alt="Feature 3">
+            <div class="feature-content">
+                <h3>南十五校聯合寒訓(已截止)</h3>
+                    <h4>想要利用寒假好好的充實自己資訊能力或拓展新視野？又或者想要認識新的資訊圈朋友？那麼機會來了！</h4>
+                    <h4>「資深玩家」由 SCIST 與南部 15 所學校資訊相關社團聯合舉辦，不僅能認識其他學校的電神，還有許多的資訊大佬在這一次寒訓中向學員分享自己的學習經驗，與前幾年不同的是，這次有三堂不同主題的多元課程，有興趣就快來報名參加，讓你也成為資訊界的「資深玩家」！</h4>
+                    <h4>👤 活動對象：全臺學生（以相同標準篩選）</h4>
+                    <h4>📆 日期：2025/01/24（五）～ 01/26（日）</h4>
+                    <h4>🏫 地點：國立成功大學、臺南一中、臺南二中</h4>
+                    <h4>👨🏻‍💻 名額：90 人（名額有限，超額將依據報名動機篩選出錄取學員）</h4>
+                    <h4>💰 費用：2000 元 / 人（若住宿則 + 1000，共 3000 元）</h4>
+            </div>
+        </div>
+
+        <div class="feature right">
+            <img src="/photo/聚餐.png" alt="Feature 4">
+            <div class="feature-content">
+                <h3>南七校聯合迎新(已截止)</h3>
+                    <h4>📆日期：2024/10/27（日）</h4>
+                    <h4>💻合辦學校：臺南女中 X 臺南一中 X 臺南二中 X 南大附中 X 永慶高中 X 嘉義高中 X 嘉義女中</h4>
+                    <h4>📍地點：臺南女中</h4>
+                    <h4>💰費用：每人300新台幣（含午餐及保險）</h4>
+                    <h4></h4>
+            </div>
+        </div>
+
+        <div class="feature">
+            <img src="/photo/迎新.png" alt="Feature 5">
+            <div class="feature-content">
+                <h3>社末聚餐</h3>
+                    <h4>對象：南大附中資訊社社員+幹部</h4>
+                    <h4>內容：吃pizza、和其他成員聊天增進感情</h4>
+            </div>
+        </div>
+    </section>
+
+    <div class="background-animation">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <footer>
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <a href="https://www.instagram.com/nfirc_3rd?utm_source=ig_web_button_share_sheet&igsh=N3IzM2xkb2RoYnFx" target="_blank" style="margin: 0 10px;">
+                <img src="/photo/ig.jpg" alt="Instagram" style="width: 150px; height: 60px;">
+            </a>
+            <a href="https://discord.gg/WKance2y" target="_blank" style="margin: 0 10px;">
+                <img src="/photo/discord.png" alt="Discord" style="width: 150px; height: 60px;">
+            </a>
+        </div>
+        <div style="margin-top: 10px; color: #f2f2f2; text-align: center;">
+            連絡方式：
+        </div>
+        <div style="margin-top: 5px; color: #f2f2f2; text-align: center;">
+            電話：0958356776　　gmail：311435@gm.tntcsh.tn.edu.tw
+        </div>
+        <p style="text-align: center;">&copy; 2024 南大附中資訊研究社</p>
+    </footer>
+
+    <button id="scrollToTopBtn" title="Go to top">回到頂端⭡</button>
+
+    <script>
+        const titleElement = document.getElementById('title');
+        const titleText = titleElement.textContent;
+        titleElement.textContent = '';
+
+        let charIndex = 0;
+        const typingDelay = 50;
+
+        function typeTitle() {
+            if (charIndex < titleText.length) {
+                titleElement.textContent += titleText.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeTitle, typingDelay);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            typeTitle();
+        });
+
+        // Scroll to top button functionality
+        const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                scrollToTopBtn.style.display = "block";
+            } else {
+                scrollToTopBtn.style.display = "none";
+            }
+        }
+
+        scrollToTopBtn.addEventListener('click', () => {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        });
+    </script>
+
+</body>
+</html>
