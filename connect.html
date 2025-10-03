@@ -194,9 +194,9 @@
         /* Responsive adjustments for the navigation bar */
         @media (max-width: 768px) {
             .nav-btns {
-                flex-direction: column; /* Stack buttons on smaller screens */
-                align-items: stretch; /* Make buttons full width */
-            }
+            display: flex; /* Use flexbox for the buttons */
+            align-items: center; /* Vertically align the buttons */
+        }
 
             .nav-btns a {
                 margin-left: 0; /* Remove left margin */
@@ -211,6 +211,14 @@
             .grid-container {
                 grid-template-columns: 1fr; /* Stack boxes in one column */
                 max-width: 100%; /* Full width on small screens */
+            }
+
+            .grid-item {
+                min-height: 80px; /* Adjust height for smaller screens */
+                margin-bottom: 10px; /* Add spacing between items */
+                width: 60%; /* Set width to half of the page */
+                margin-left: auto;
+                margin-right: auto;
             }
         }
 
@@ -251,19 +259,68 @@
             color: white;
             transform: translateY(-2px);
         }
+
+        /* Hamburger menu styles */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 25px;
+            cursor: pointer;
+            margin-left: auto;
+        }
+
+        .bar {
+            height: 3px;
+            width: 100%;
+            background-color: #6441A5;
+            transition: all 0.3s;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a {
+            margin-left: 20px;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .nav-btns {
+                /*flex-direction: column;  Stack buttons on smaller screens */
+                align-items: center; /* Make buttons horizontally align */
+                display: flex;
+            }
+
+            .nav-btns a {
+                margin-left: 0; /* Remove left margin */
+                margin-top: 10px; /* Add some spacing between buttons */
+                flex-shrink: 1; /* Allow buttons to shrink */
+                font-size: 0.9em; /* Reduce font size */
+                padding: 10px 15px;
+            }
+
+            .nav-btns a:last-child {
+                margin-right: 0; /* Ensure no right margin on the last button */
+                margin-bottom: 0;
+            }
+        }
     </style>
 </head>
 <body>
     <nav>
         <div class="nav-left">
-            <img src="nfirc_logo.png" alt="NFIRC Logo" class="nav-logo">
-            <a href="./index.html" class="nav-nfirc">
-                <img src="./NFIRC.jpg" width="100px" alt="">
+            <img src="./nfirc_logo.png" alt="NFIRC Logo" class="nav-logo">
+            <a href="/index.html" class="nav-nfirc">
+                <img src="NFIRC.jpg" width="100px" alt="">
             </a>
         </div>
         <div class="nav-btns">
             <a href="./index.html">主頁</a>
-            <a href="https://www.instagram.com/nfirc_3rd?utm_source=ig_web_button_share_sheet&igsh=N3IzM2xkb2RoYnFx" target="_blank">聯絡我們</a>
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=311435@gm.tntcsh.tn.edu.tw" target="_blank">聯絡我們</a>
             <a href="connect.html">相關連結</a>
             <a href="https://discord.gg/WKance2y" target="_blank">Discord 社群</a>
             <a href="https://www.instagram.com/nfirc_3rd?utm_source=ig_web_button_share_sheet&igsh=N3IzM2xkb2RoYnFx" target="_blank">Instagram</a>
@@ -407,13 +464,15 @@
             document.body.scrollTop = 0; // For Safari
             document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         });
+
+        // Hamburger menu functionality
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('nav-active');
+        });
     </script>
 
 </body>
-
 </html>
-
-
-
-
-
