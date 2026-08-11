@@ -5,18 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>南大附中資訊研究社</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: sans-serif;
             margin: 0;
             background-color: #121212;
             color: #fff;
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
         nav {
             background-color: rgba(30, 30, 30, 0.9);
             overflow: hidden;
-            padding: 20px;
+            padding: 16px 20px;
             position: fixed;
             top: 0;
             width: 100%;
@@ -25,11 +30,15 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
         }
 
         .nav-left {
             display: flex;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .nav-logo {
@@ -55,22 +64,58 @@
             color: #6441A5;
         }
 
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            gap: 4px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 6px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background-color: #fff;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: translateY(6px) rotate(45deg);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: translateY(-6px) rotate(-45deg);
+        }
+
         .nav-btns {
-            display: flex; /* Use flexbox for the buttons */
-            align-items: center; /* Vertically align the buttons */
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .nav-btns a {
             display: inline-block;
             color: #f2f2f2;
             text-align: center;
-            padding: 14px 20px;
+            padding: 10px 14px;
             text-decoration: none;
             transition: background-color 0.3s, color 0.3s;
             border-radius: 5px;
-            margin-left: 20px;
+            margin: 0;
             background-color: rgba(100, 65, 165, 0.3);
             border: 1px solid #6441A5;
+            white-space: nowrap;
         }
 
         .nav-btns a:hover {
@@ -84,28 +129,32 @@
         }
 
         .container {
-            padding: 120px 20px;
+            padding: clamp(120px, 24vw, 180px) 16px 40px;
             text-align: center;
+            max-width: 1120px;
+            margin: 0 auto;
         }
 
         .container2 {
-            padding: 10px 20px;
+            padding: 10px 16px 20px;
             text-align: center;
+            max-width: 1120px;
+            margin: 0 auto;
         }
 
         h1 {
-            font-size: 4em;
-            margin-bottom: 30px;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            margin-bottom: 24px;
             text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
 
         p {
-            font-size: 1.3em;
+            font-size: clamp(1rem, 2.2vw, 1.3rem);
             line-height: 1.7;
             max-width: 800px;
             margin: 0 auto;
-            padding: 30px;
+            padding: 20px;
             background-color: rgba(30, 30, 30, 0.8);
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.5);
@@ -193,25 +242,91 @@
             }
         }
 
-        /* Responsive adjustments for the navigation bar */
         @media (max-width: 768px) {
+            nav {
+                padding: 14px 16px;
+            }
+
+            .nav-left {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
             .nav-btns {
-                /*flex-direction: column;  Stack buttons on smaller screens */
-                align-items: center; /* Make buttons horizontally align */
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 8px;
+                padding-top: 8px;
+            }
+
+            .nav-btns.show {
                 display: flex;
             }
 
             .nav-btns a {
-                margin-left: 0; /* Remove left margin */
-                margin-top: 10px; /* Add some spacing between buttons */
-                flex-shrink: 1; /* Allow buttons to shrink */
-                font-size: 0.9em; /* Reduce font size */
-                padding: 10px 15px;
+                width: 100%;
+                font-size: 0.9em;
+                padding: 10px 12px;
             }
 
             .nav-btns a:last-child {
-                margin-right: 0; /* Ensure no right margin on the last button */
-                margin-bottom: 0;
+                margin-right: 0;
+            }
+
+            .features {
+                width: 96%;
+                margin: 20px auto;
+            }
+
+            .feature.right {
+                flex-direction: column;
+            }
+
+            .feature {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                height: auto;
+            }
+
+            .feature img {
+                width: 100%;
+                max-width: 420px;
+                height: auto;
+                margin-bottom: 10px;
+            }
+
+            .feature .feature-content {
+                width: 100%;
+                text-align: left;
+                padding: 15px;
+            }
+
+            footer {
+                padding: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-btns a {
+                width: calc(50% - 8px);
+                justify-content: center;
+            }
+
+            .container {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .feature .feature-content h3,
+            .feature .feature-content h4 {
+                font-size: 1rem;
             }
         }
 
@@ -229,6 +344,11 @@
             margin: 0;
             color: #f2f2f2;
             text-align: center; /* Center the copyright text */
+        }
+
+        footer img {
+            max-width: 100%;
+            height: auto;
         }
 
         #scrollToTopBtn {
@@ -255,7 +375,7 @@
         }
 
         .features {
-            width: 70%;
+            width: min(92%, 1100px);
             margin: 30px auto;
         }
 
@@ -263,9 +383,21 @@
             display: flex;
             margin-bottom: 30px;
             background-color: rgba(30, 30, 30, 0.8);
-            border-radius: 10px;
+            border: 2px solid rgba(100, 65, 165, 0.4);
+            border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.5);
             overflow: hidden;
+            transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            cursor: pointer;
+            align-items: stretch;
+        }
+
+        .feature:hover,
+        .feature:active {
+            border-color: #6441A5;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+            background-color: rgba(42, 42, 42, 0.95);
         }
 
         .feature.right {
@@ -274,54 +406,149 @@
 
         .feature img {
             width: 45%;
-            height: auto;
-            object-fit: cover;
+            min-width: 220px;
+            height: 260px;
+            object-fit: contain;
+            object-position: center;
+            display: block;
+            padding: 10px;
+            box-sizing: border-box;
+            background-color: rgba(255, 255, 255, 0.03);
         }
 
         .feature .feature-content {
-            width: 80%;
+            width: 55%;
             padding: 20px;
             text-align: left;
         }
 
         .feature .feature-content h3 {
-            font-size: 1.6em;
-            margin-bottom: 15px;
+            font-size: 1.4em;
+            margin-bottom: 10px;
         }
 
-        .feature .feature-content p {
-            font-size: 1.1em;
-            line-height: 1.6;
+        .feature .feature-content h4 {
+            font-size: 1rem;
+            margin: 8px 0;
+            font-weight: 500;
+        }
+
+        .feature .feature-content .preview-list {
+            margin: 10px 0 0 0;
+            padding-left: 18px;
+            color: #d8c7ff;
+        }
+
+        .feature .feature-content .preview-list li {
+            margin-bottom: 6px;
+        }
+
+        .modal {
+            display: flex;
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background: rgba(0, 0, 0, 0.78);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+        }
+
+        .modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-card {
+            width: min(92vw, 760px);
+            max-height: 85vh;
+            overflow-y: auto;
+            background: #1f1f1f;
+            border: 2px solid #6441A5;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+            color: #fff;
+            transform: translateY(20px) scale(0.97);
+            transition: transform 0.25s ease;
+        }
+
+        .modal.show .modal-card {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-card h3 {
+            margin-top: 0;
+            font-size: 1.5em;
+            color: #fff;
+        }
+
+        .modal-card .close-btn {
+            float: right;
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 1.4em;
+            cursor: pointer;
+        }
+
+        .modal-card ul {
+            padding-left: 18px;
+        }
+
+        .modal-card li {
+            margin-bottom: 6px;
         }
 
         /* Responsive adjustments for the features section */
         @media (max-width: 768px) {
             .features {
-                width: 100%; /* Full width on smaller screens */
-                margin: 20px auto; /* Adjust margins */
-            }
-
-            .feature.right {
-                flex-direction: column; /* Stack image and content */
+                width: 100%;
+                margin: 20px auto;
             }
 
             .feature {
-                flex-direction: column; /* Stack image and content */
-                align-items: center; /* Center align content */
-                text-align: center; /* Center text within the feature */
-                height: auto; /* Adjust height to fit content */
+                flex-direction: row;
+                align-items: stretch;
+                text-align: left;
+            }
+
+            .feature.right {
+                flex-direction: row-reverse;
             }
 
             .feature img {
-                width: 80%; /* Reduce image width for better fit */
+                width: 42%;
+                min-width: 140px;
                 height: auto;
-                margin-bottom: 10px; /* Add spacing below the image */
+                margin-bottom: 0;
             }
 
             .feature .feature-content {
-                width: 90%; /* Adjust content width */
-                text-align: center; /* Center align text */
-                padding: 15px; /* Adjust padding */
+                width: 58%;
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .feature {
+                flex-direction: column;
+            }
+
+            .feature.right {
+                flex-direction: column;
+            }
+
+            .feature img {
+                width: 100%;
+                height: 240px;
+            }
+
+            .feature .feature-content {
+                width: 100%;
             }
         }
     </style>
@@ -334,6 +561,11 @@
                 <img src="NFIRC.jpg" width="100px" alt="">
             </a>
         </div>
+        <button class="menu-toggle" aria-label="切換導覽選單" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
         <div class="nav-btns">
             <a href="./index.html">主頁</a>
             <a href="https://mail.google.com/mail/?view=cm&fs=1&to=311435@gm.tntcsh.tn.edu.tw" target="_blank">聯絡我們</a>
@@ -356,111 +588,15 @@
         <h1 id="title">精彩活動</h1>
     </div>
 
-    <section class="features">
-        <div class="feature right">
-            <img src="./2026寒訓.jpg" alt="Feature 2">
-            <div class="feature-content">
-                <h3>⚡閃電 4 連編⚡</h3>
-                <h3>SCIST × SCAICT 2026 聯合寒訓(已截止)</h3>
-                    <h4>📍 地點：國立成功大學電機工程學系</h4>
-                    <h4>📅 時間：2026/2/5（四）～ 2/8（日）</h4>
-                    <h4>🕒報名期限：</h4>
-                    <ul>
-                        <li>早鳥：即日起至 2025/12/14（日）23:59</li>
-                        <li>一般：即日起至 2026/1/4（日）23:59</li>
-                    </ul>
-                    <h4>💰 費用：</h4>
-                    <ul>
-                        <li>早鳥報名費：4300 元</li>
-                        <li>單人：NTD$ 4500</li>
-                        <li>雙人：NTD$ 4200</li>
-                        <li>三人：NTD$ 4100</li>
-                        <li>四人：NTD$ 4000</li>
-                        <li style="color:red">不住宿方案， 報名費現折 💰1000 元！</li>
-                        <li style="color:red">（報名費用已含：場地、餐飲、保險、衣服等）</li>
-                    </ul>
-                    <h4>🎨課程內容：</h4>
-                    <ul>
-                        <li>LLM 基礎與應用架構</li>
-                        <li>多模型 API串接實作</li>
-                        <li>多平台 UI 概述</li>
-                        <li>API 設計</li>
-                        <li>雲端網路維運</li>
-                    </ul>
-                    <h4>📌注意事項：</h4>
-                        <ul>
-                            <li>報名時間依系統紀錄的提交表單時間為準</li>
-                            <li>正式參加資格將另外以電子郵件通知</li>
-                            <li>團報折扣以錄取人數計算非報名人數</li>
-                            <li>活動期間學員需自備筆電</li>
-                        </ul>
+    <section class="features" id="activities-list"></section>
 
-
-            </div>
+    <div class="modal" id="activity-modal" aria-hidden="true">
+        <div class="modal-card">
+            <button class="close-btn" type="button" aria-label="關閉活動詳情">×</button>
+            <h3 id="modal-title">活動詳情</h3>
+            <div id="modal-content"></div>
         </div>
-        <div class="feature">
-            <img src="2025迎新.png" alt="Feature 1">
-            <div class="feature-content">
-                <h3>南九校聯合迎新(已截止)
-                </h3>
-                    <h4>📅 活動日期：10/26（日）</h4>
-                    <h4>📍 活動地點：國立臺南女子高級中學椰風廳</h4>
-                    <h4>👥 參加對象：高中資訊社 高一、二學生（以高一新生為主）</h4>
-                    <h4>🎉 活動內容：趣味活動，破冰、交流、互動、講座課程（兩小時）</h4>
-                    <h4>👩‍💻 活動主旨：透過簡單有趣的活動，讓學員更加認識資訊社，並與不同學校的社員們交流想法、增進彼此的情誼，共同體驗資訊的樂趣與無限可能</h4>
-            </div>
-        </div>
-
-        <div class="feature right">
-            <img src="./聯合社課.png" alt="Feature 2">
-            <div class="feature-content">
-                <h3>南四校聯合社課(已截止)</h3>
-                    <h4>🎨 主題：基礎網頁設計</h4>
-                    <h4>💻 四校聯合主辦：臺南女中 X 臺南一中 X 臺南二中 X 南大附中</h4>
-                    <h4>📍 地點：臺南一中</h4>
-                    <h4>📅 時間：2025/5/25（日） 9:00 - 17:00</h4>
-                    <h4>💰 費用：免費！（不含午餐及保險）</h4>
-                    <h4>這是一個讓你從 0 開始學習網頁設計的絕佳機會！</h4>
-
-
-            </div>
-        </div>
-
-        <div class="feature">
-            <img src="./2025寒訓.png" alt="Feature 3">
-            <div class="feature-content">
-                <h3>南十五校聯合寒訓(已截止)</h3>
-                    <h4>想要利用寒假好好的充實自己資訊能力或拓展新視野？又或者想要認識新的資訊圈朋友？那麼機會來了！</h4>
-                    <h4>「資深玩家」由 SCIST 與南部 15 所學校資訊相關社團聯合舉辦，不僅能認識其他學校的電神，還有許多的資訊大佬在這一次寒訓中向學員分享自己的學習經驗，與前幾年不同的是，這次有三堂不同主題的多元課程，有興趣就快來報名參加，讓你也成為資訊界的「資深玩家」！</h4>
-                    <h4>👤 活動對象：全臺學生（以相同標準篩選）</h4>
-                    <h4>📆 日期：2025/01/24（五）～ 01/26（日）</h4>
-                    <h4>🏫 地點：國立成功大學、臺南一中、臺南二中</h4>
-                    <h4>👨🏻‍💻 名額：90 人（名額有限，超額將依據報名動機篩選出錄取學員）</h4>
-                    <h4>💰 費用：2000 元 / 人（若住宿則 + 1000，共 3000 元）</h4>
-            </div>
-        </div>
-
-        <div class="feature right">
-            <img src="./社末聚餐.webp" alt="Feature 4">
-            <div class="feature-content">
-                <h3>社末聚餐</h3>
-                    <h4>對象：南大附中資訊社社員+幹部</h4>
-                    <h4>內容：吃pizza、和其他成員聊天增進感情</h4>
-            </div>
-        </div>
-
-        <div class="feature">
-            <img src="./迎新.png" alt="Feature 5">
-            <div class="feature-content">
-                <h3>南七校聯合迎新(已截止)</h3>
-                    <h4>📆日期：2024/10/27（日）</h4>
-                    <h4>💻合辦學校：臺南女中 X 臺南一中 X 臺南二中 X 南大附中 X 永慶高中 X 嘉義高中 X 嘉義女中</h4>
-                    <h4>📍地點：臺南女中</h4>
-                    <h4>💰費用：每人300新台幣（含午餐及保險）</h4>
-                    <h4></h4>
-            </div>
-        </div>
-    </section>
+    </div>
 
     <div class="background-animation">
         <span></span>
@@ -488,7 +624,7 @@
             連絡方式：
         </div>
         <div style="margin-top: 5px; color: #f2f2f2; text-align: center;">
-            電話：0958356776　　gmail：311435@gm.tntcsh.tn.edu.tw
+            電話：0958356776　　gmail：nfirc.official@gmail.com
         </div>
         <p style="text-align: center;">&copy; 2024 南大附中資訊研究社</p>
     </footer>
@@ -513,6 +649,7 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             typeTitle();
+            loadActivities();
         });
 
         // Scroll to top button functionality
@@ -532,6 +669,95 @@
             document.body.scrollTop = 0; // For Safari
             document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         });
+
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navBtns = document.querySelector('.nav-btns');
+
+        if (menuToggle && navBtns) {
+            menuToggle.addEventListener('click', () => {
+                navBtns.classList.toggle('show');
+                menuToggle.classList.toggle('active');
+                const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+                menuToggle.setAttribute('aria-expanded', String(!expanded));
+            });
+        }
+
+        async function loadActivities() {
+            const container = document.getElementById('activities-list');
+            const modal = document.getElementById('activity-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalContent = document.getElementById('modal-content');
+            const closeBtn = modal.querySelector('.close-btn');
+
+            try {
+                const response = await fetch('./activities.json');
+                const data = await response.json();
+
+                container.innerHTML = '';
+
+                data.activities.forEach((activity, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'feature';
+                    card.innerHTML = `
+                        <img src="${activity.image}" alt="${activity.title}">
+                        <div class="feature-content">
+                            <h3>${activity.title}</h3>
+                            <h4>${activity.subtitle}</h4>
+                            <p><strong>📅 報名時間：</strong>${activity.registration}</p>
+                            <ul class="preview-list">
+                                ${activity.previewContent.map(item => `<li>${item}</li>`).join('')}
+                            </ul>
+                        </div>
+                    `;
+
+                    card.addEventListener('click', () => {
+                        modalTitle.textContent = activity.title;
+                        const details = activity.details || {};
+                        const detailHtml = [];
+
+                        if (details.location) detailHtml.push(`<p><strong>📍 地點：</strong>${details.location}</p>`);
+                        if (details.time) detailHtml.push(`<p><strong>📅 時間：</strong>${details.time}</p>`);
+                        if (details.target) detailHtml.push(`<p><strong>👥 對象：</strong>${details.target}</p>`);
+                        if (details.host) detailHtml.push(`<p><strong>💻 主辦：</strong>${details.host}</p>`);
+                        if (details.theme) detailHtml.push(`<p><strong>🎯 主旨：</strong>${details.theme}</p>`);
+                        if (details.content && details.content.length) {
+                            detailHtml.push(`<h4>🎉 活動內容：</h4><ul>${details.content.map(item => `<li>${item}</li>`).join('')}</ul>`);
+                        }
+                        if (details.courses && details.courses.length) {
+                            detailHtml.push(`<h4>🎨 課程內容：</h4><ul>${details.courses.map(item => `<li>${item}</li>`).join('')}</ul>`);
+                        }
+                        if (details.fees && details.fees.length) {
+                            detailHtml.push(`<h4>💰 費用：</h4><ul>${details.fees.map(item => `<li>${item}</li>`).join('')}</ul>`);
+                        }
+                        if (details.notes && details.notes.length) {
+                            detailHtml.push(`<h4>📌 備註：</h4><ul>${details.notes.map(item => `<li>${item}</li>`).join('')}</ul>`);
+                        }
+                        if (details.quota) detailHtml.push(`<p><strong>👨🏻‍💻 名額：</strong>${details.quota}</p>`);
+
+                        modalContent.innerHTML = detailHtml.join('');
+                        modal.classList.add('show');
+                        modal.setAttribute('aria-hidden', 'false');
+                    });
+
+                    container.appendChild(card);
+                });
+            } catch (error) {
+                console.error('載入活動資料失敗:', error);
+                container.innerHTML = '<p>活動資料載入失敗，請稍後再試。</p>';
+            }
+
+            closeBtn.addEventListener('click', () => {
+                modal.classList.remove('show');
+                modal.setAttribute('aria-hidden', 'true');
+            });
+
+            modal.addEventListener('click', (event) => {
+                if (event.target === modal) {
+                    modal.classList.remove('show');
+                    modal.setAttribute('aria-hidden', 'true');
+                }
+            });
+        }
     </script>
 
 </body>

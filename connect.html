@@ -5,18 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>相關連結</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: sans-serif;
             margin: 0;
             background-color: #121212;
             color: #fff;
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
         nav {
             background-color: rgba(30, 30, 30, 0.9);
             overflow: hidden;
-            padding: 20px;
+            padding: 16px 20px;
             position: fixed;
             top: 0;
             width: 100%;
@@ -25,11 +30,15 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
         }
 
         .nav-left {
             display: flex;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .nav-logo {
@@ -55,22 +64,58 @@
             color: #6441A5;
         }
 
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            gap: 4px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 6px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background-color: #fff;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: translateY(6px) rotate(45deg);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: translateY(-6px) rotate(-45deg);
+        }
+
         .nav-btns {
-            display: flex; /* Use flexbox for the buttons */
-            align-items: center; /* Vertically align the buttons */
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .nav-btns a {
             display: inline-block;
             color: #f2f2f2;
             text-align: center;
-            padding: 14px 20px;
+            padding: 10px 14px;
             text-decoration: none;
             transition: background-color 0.3s, color 0.3s;
             border-radius: 5px;
-            margin-left: 20px;
+            margin: 0;
             background-color: rgba(100, 65, 165, 0.3);
             border: 1px solid #6441A5;
+            white-space: nowrap;
         }
 
         .nav-btns a:hover {
@@ -84,33 +129,36 @@
         }
 
         .container {
-            padding: 120px 20px;
+            padding: clamp(120px, 24vw, 180px) 16px 40px;
             text-align: center;
+            max-width: 1120px;
+            margin: 0 auto;
         }
 
         h1 {
-            font-size: 4em;
-            margin-bottom: 30px;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            margin-bottom: 24px;
             text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
 
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3 columns */
-            grid-gap: 20px; /* Space between boxes */
-            max-width: 800px; /* Adjust as needed */
-            margin: 20px auto; /* Center the grid */
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-gap: 20px;
+            max-width: 980px;
+            margin: 20px auto;
         }
 
         .grid-item {
             background-color: rgba(30, 30, 30, 0.8);
             border: 1px solid #6441A5;
             border-radius: 10px;
-            padding: 3px;
+            padding: 6px;
             text-align: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.5);
-            min-height: 110px; /* Ensure consistent height */
+            min-height: 110px;
+            overflow: hidden;
         }
 
         .grid-item a {
@@ -124,7 +172,9 @@
         .grid-item img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Ensure the image fills the container */
+            object-fit: cover;
+            display: block;
+            border-radius: 6px;
         }
 
         .background-animation {
@@ -191,34 +241,68 @@
             }
         }
 
-        /* Responsive adjustments for the navigation bar */
         @media (max-width: 768px) {
+            nav {
+                padding: 14px 16px;
+            }
+
+            .nav-left {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
             .nav-btns {
-            display: flex; /* Use flexbox for the buttons */
-            align-items: center; /* Vertically align the buttons */
-        }
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 8px;
+                padding-top: 8px;
+            }
+
+            .nav-btns.show {
+                display: flex;
+            }
 
             .nav-btns a {
-                margin-left: 0; /* Remove left margin */
-                margin-top: 10px; /* Add some spacing between buttons */
+                width: 100%;
+                font-size: 0.9em;
+                padding: 10px 12px;
             }
 
             .nav-btns a:last-child {
-                margin-right: 0; /* Ensure no right margin on the last button */
-                margin-bottom: 0;
+                margin-right: 0;
             }
 
             .grid-container {
-                grid-template-columns: 1fr; /* Stack boxes in one column */
-                max-width: 100%; /* Full width on small screens */
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                max-width: 100%;
             }
 
             .grid-item {
-                min-height: 80px; /* Adjust height for smaller screens */
-                margin-bottom: 10px; /* Add spacing between items */
-                width: 60%; /* Set width to half of the page */
-                margin-left: auto;
-                margin-right: auto;
+                min-height: 90px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-btns a {
+                width: calc(50% - 8px);
+            }
+
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+
+            .grid-item {
+                width: 100%;
+            }
+
+            footer {
+                padding: 16px;
             }
         }
 
@@ -235,6 +319,11 @@
         footer p {
             margin: 0;
             color: #f2f2f2;
+        }
+
+        footer img {
+            max-width: 100%;
+            height: auto;
         }
 
         #scrollToTopBtn {
@@ -317,8 +406,11 @@
             <a href="./index.html" class="nav-nfirc">
                 <img src="NFIRC.jpg" width="100px" alt="">
             </a>
-        </div>
-        <div class="nav-btns">
+        </div>        <button class="menu-toggle" aria-label="切換導覽選單" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>        <div class="nav-btns">
             <a href="./index.html">主頁</a>
             <a href="https://mail.google.com/mail/?view=cm&fs=1&to=311435@gm.tntcsh.tn.edu.tw" target="_blank">聯絡我們</a>
             <a href="connect.html">相關連結</a>
@@ -435,7 +527,7 @@
             連絡方式：
         </div>
         <div style="margin-top: 5px; color: #f2f2f2; text-align: center;">
-            電話：0958356776　　gmail：311435@gm.tntcsh.tn.edu.tw
+            電話：0958356776　　gmail：nfirc.official@gmail.com
         </div>
         <p style="text-align: center;">&copy; 2024 南大附中資訊研究社</p>
     </footer>
@@ -480,13 +572,17 @@
             document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         });
 
-        // Hamburger menu functionality
-        const hamburger = document.getElementById('hamburger');
-        const navLinks = document.querySelector('.nav-links');
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navBtns = document.querySelector('.nav-btns');
 
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('nav-active');
-        });
+        if (menuToggle && navBtns) {
+            menuToggle.addEventListener('click', () => {
+                navBtns.classList.toggle('show');
+                menuToggle.classList.toggle('active');
+                const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+                menuToggle.setAttribute('aria-expanded', String(!expanded));
+            });
+        }
     </script>
 
 </body>

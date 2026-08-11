@@ -7,7 +7,7 @@ app = Flask(__name__)
 CORS(app)
 
 def send_email(message):
-    sender_email = "your_gmail_username@gmail.com"  # Replace with your Gmail address
+    sender_email = "nfirc.official@gmail.com"  # Replace with your Gmail address
     sender_password = "your_gmail_password"  # Replace with your Gmail password or an app password
     receiver_email = "311435@gm.tntcsh.tn.edu.tw"
 
