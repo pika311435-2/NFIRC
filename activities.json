@@ -1,6 +1,28 @@
 {
   "activities": [
     {
+      "id": "freshman-welcome-2026",
+      "title": "南八校資訊社團聯合迎新",
+      "subtitle": "讓高中資訊社的新生們透過活動認識彼此並交換想法",
+      "image": "./2026迎新.png",
+      "previewContent": [
+        "趣味活動",
+        "破冰與交流"
+      ],
+      "registration": "報名日期至10/6(二)",
+      "details": {
+        "location": "台南女中椰風廳",
+        "time": "10/18（日）9:00 ~ 16:30",
+        "target": "高中資訊社 高一、二學生（以高一新生為主）",
+        "fees": "350元/人 (含午餐、保險、場地)",
+        "content": [
+          "趣味活動",
+          "破冰、交流、互動"
+        ],
+        "theme": "透過簡單有趣的活動，讓學員更加認識資訊社，並與不同學校的社員們交流想法"
+      }
+    },
+    {
       "id": "winter-camp-2026",
       "title": "⚡閃電 4 連編⚡",
       "subtitle": "SCIST × SCAICT 2026 聯合寒訓",
