@@ -698,45 +698,75 @@
                 data.activities.forEach((activity, index) => {
                     const card = document.createElement('div');
                     card.className = 'feature';
+                    card.tabIndex = 0;
+                    card.setAttribute('role', 'button');
+                    card.setAttribute('aria-label', `查看活動詳情：${activity.title || '活動'}`);
+                    const previewContent = Array.isArray(activity.previewContent) ? activity.previewContent : [];
                     card.innerHTML = `
-                        <img src="${activity.image}" alt="${activity.title}">
+                        <img src="${activity.image || ''}" alt="${activity.title || '活動圖片'}">
                         <div class="feature-content">
-                            <h3>${activity.title}</h3>
-                            <h4>${activity.subtitle}</h4>
-                            <p><strong>📅 報名時間：</strong>${activity.registration}</p>
+                            <h3>${activity.title || '未命名活動'}</h3>
+                            <h4>${activity.subtitle || ''}</h4>
+                            ${activity.registration ? `<p><strong>📅 報名時間：</strong>${activity.registration}</p>` : ''}
                             <ul class="preview-list">
-                                ${activity.previewContent.map(item => `<li>${item}</li>`).join('')}
+                                ${previewContent.map(item => `<li>${item}</li>`).join('')}
                             </ul>
                         </div>
                     `;
 
-                    card.addEventListener('click', () => {
-                        modalTitle.textContent = activity.title;
+                    const openActivityDetails = () => {
+                        modalTitle.textContent = activity.title || '活動詳情';
                         const details = activity.details || {};
-                        const detailHtml = [];
+                        const detailLabels = {
+                            location: '📍 地點',
+                            time: '📅 時間',
+                            target: '👥 對象',
+                            host: '💻 主辦',
+                            theme: '🎯 主旨',
+                            content: '🎉 活動內容',
+                            courses: '🎨 課程內容',
+                            fees: '💰 費用',
+                            notes: '📌 備註',
+                            quota: '👨🏻‍💻 名額'
+                        };
+                        const detailElements = [];
 
-                        if (details.location) detailHtml.push(`<p><strong>📍 地點：</strong>${details.location}</p>`);
-                        if (details.time) detailHtml.push(`<p><strong>📅 時間：</strong>${details.time}</p>`);
-                        if (details.target) detailHtml.push(`<p><strong>👥 對象：</strong>${details.target}</p>`);
-                        if (details.host) detailHtml.push(`<p><strong>💻 主辦：</strong>${details.host}</p>`);
-                        if (details.theme) detailHtml.push(`<p><strong>🎯 主旨：</strong>${details.theme}</p>`);
-                        if (details.content && details.content.length) {
-                            detailHtml.push(`<h4>🎉 活動內容：</h4><ul>${details.content.map(item => `<li>${item}</li>`).join('')}</ul>`);
-                        }
-                        if (details.courses && details.courses.length) {
-                            detailHtml.push(`<h4>🎨 課程內容：</h4><ul>${details.courses.map(item => `<li>${item}</li>`).join('')}</ul>`);
-                        }
-                        if (details.fees && details.fees.length) {
-                            detailHtml.push(`<h4>💰 費用：</h4><ul>${details.fees.map(item => `<li>${item}</li>`).join('')}</ul>`);
-                        }
-                        if (details.notes && details.notes.length) {
-                            detailHtml.push(`<h4>📌 備註：</h4><ul>${details.notes.map(item => `<li>${item}</li>`).join('')}</ul>`);
-                        }
-                        if (details.quota) detailHtml.push(`<p><strong>👨🏻‍💻 名額：</strong>${details.quota}</p>`);
+                        Object.entries(details).forEach(([key, value]) => {
+                            if (value === null || value === undefined || value === '') return;
 
-                        modalContent.innerHTML = detailHtml.join('');
+                            const label = detailLabels[key] || key;
+                            if (Array.isArray(value)) {
+                                if (!value.length) return;
+                                const heading = document.createElement('h4');
+                                heading.textContent = `${label}：`;
+                                const list = document.createElement('ul');
+                                value.forEach(item => {
+                                    const listItem = document.createElement('li');
+                                    listItem.textContent = typeof item === 'object' ? JSON.stringify(item) : String(item);
+                                    list.appendChild(listItem);
+                                });
+                                detailElements.push(heading, list);
+                                return;
+                            }
+
+                            const paragraph = document.createElement('p');
+                            const strong = document.createElement('strong');
+                            strong.textContent = `${label}：`;
+                            paragraph.append(strong, document.createTextNode(typeof value === 'object' ? JSON.stringify(value) : String(value)));
+                            detailElements.push(paragraph);
+                        });
+
+                        modalContent.replaceChildren(...detailElements);
                         modal.classList.add('show');
                         modal.setAttribute('aria-hidden', 'false');
+                    };
+
+                    card.addEventListener('click', openActivityDetails);
+                    card.addEventListener('keydown', (event) => {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                            event.preventDefault();
+                            openActivityDetails();
+                        }
                     });
 
                     container.appendChild(card);
