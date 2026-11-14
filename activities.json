@@ -4,7 +4,7 @@
       "id": "freshman-welcome-2026",
       "title": "南八校資訊社團聯合迎新",
       "subtitle": "讓高中資訊社的新生們透過活動認識彼此並交換想法",
-      "image": "./2026迎新.png",
+      "image": "./images/2026迎新.png",
       "previewContent": [
         "趣味活動",
         "破冰與交流"
@@ -26,7 +26,7 @@
       "id": "winter-camp-2026",
       "title": "⚡閃電 4 連編⚡",
       "subtitle": "SCIST × SCAICT 2026 聯合寒訓",
-      "image": "./2026寒訓.jpg",
+      "image": "./images/2026寒訓.jpg",
       "previewContent": [
         "LLM 基礎與應用架構",
         "多模型 API 串接實作",
@@ -64,7 +64,7 @@
       "id": "freshman-welcome-2025",
       "title": "南九校聯合迎新",
       "subtitle": "讓高中資訊社的新生們透過活動認識彼此並交換想法",
-      "image": "./2025迎新.png",
+      "image": "./images/2025迎新.png",
       "previewContent": [
         "趣味活動",
         "破冰與交流",
@@ -87,7 +87,7 @@
       "id": "joint-website-class",
       "title": "南四校聯合社課",
       "subtitle": "基礎網頁設計",
-      "image": "./聯合社課.png",
+      "image": "./images/聯合社課.png",
       "previewContent": [
         "基礎網頁設計",
         "HTML 與 CSS 入門",
@@ -110,7 +110,7 @@
       "id": "winter-training-2025",
       "title": "南十五校聯合寒訓",
       "subtitle": "資深玩家寒訓",
-      "image": "./2025寒訓.png",
+      "image": "./images/2025寒訓.png",
       "previewContent": [
         "資訊能力充實",
         "認識新朋友",
@@ -136,7 +136,7 @@
       "id": "year-end-dinner",
       "title": "社末聚餐",
       "subtitle": "南大附中資訊社社員與幹部交流",
-      "image": "./社末聚餐.webp",
+      "image": "./images/社末聚餐.webp",
       "previewContent": [
         "吃 pizza",
         "與成員聊天",
@@ -157,7 +157,7 @@
       "id": "seven-school-welcome",
       "title": "南七校聯合迎新",
       "subtitle": "跨校交流迎新活動",
-      "image": "./迎新.png",
+      "image": "./images/迎新.png",
       "previewContent": [
         "跨校交流",
         "午餐與保險",
